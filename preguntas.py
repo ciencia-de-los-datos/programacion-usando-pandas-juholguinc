@@ -66,8 +66,8 @@ def pregunta_04():
     E    4.785714
     Name: _c2, dtype: float64
     """
-    a=tbl0[["_c1", "_c2"]].groupby("_c1").mean()
-    return a
+    #a = tbl0[["_c1", "_c2"]].groupby("_c1").mean()
+    return tbl0[["_c1", "_c2"]].groupby("_c1").mean().squeeze()
 
 
 def pregunta_05():
@@ -249,3 +249,5 @@ def pregunta_13():
     tbleft = tbleft.merge(tbl2, on='_c0', how ='left')
     r12=tbleft[["_c1", "_c5b"]].groupby("_c1").sum()
     return r12
+
+print(type(pregunta_04()))
