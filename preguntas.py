@@ -115,7 +115,7 @@ def pregunta_07():
     E    67
     Name: _c2, dtype: int64
     """
-    a=tbl0[["_c1", "_c2"]].groupby("_c1").sum()
+    a = tbl0[["_c1", "_c2"]].groupby("_c1").sum().squeeze()
     return a
 
 
@@ -201,9 +201,12 @@ def pregunta_11():
     tblcopy4 = tbl1.copy()
     tblcopy4.sort_values(by=['_c0', '_c4'])
     tblcopy4 = tblcopy4.sort_values(by=['_c0', '_c4'])
-    a=tblcopy4[["_c0", "_c4"]].groupby("_c0").sum()
-    a['_c4'] =list(map(lambda x: ",".join(x), a['_c4']))
-    return a
+    n=tblcopy4[["_c0", "_c4"]].groupby("_c0").sum()
+    dat = pd.DataFrame(tblcopy4['_c0'].unique(), columns=['_c0'])
+    dat['_c4'] = list(map(lambda x: ",".join(x), n['_c4']))
+
+
+    return dat
 
 
 def pregunta_12():
@@ -248,6 +251,8 @@ def pregunta_13():
     tbleft = tbl0.copy()
     tbleft = tbleft.merge(tbl2, on='_c0', how ='left')
     r12=tbleft[["_c1", "_c5b"]].groupby("_c1").sum()
-    return r12
+    return r12.squeeze()
 
-print(type(pregunta_04()))
+
+print(pregunta_13())
+
